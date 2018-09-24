@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_3.dtd">
+
+
+<struts-config>
+    <form-beans>
+        <form-bean name="MedicosActionForm" type="controller.actionform.MedicosActionForm"/>
+        <form-bean name="LoginActionForm" type="controller.actionform.LoginActionForm"/>
+        <form-bean name="ConsultorioActionForm" type="controller.actionform.ConsultorioActionForm"/>
+        <form-bean name="UsuariosActionForm" type="controller.actionform.UsuariosActionForm"/>
+        <form-bean name="PacientesActionForm" type="controller.actionform.PacientesActionForm"/>
+    </form-beans>
+    
+    <global-exceptions>
+    
+    </global-exceptions>
+
+    <global-forwards>
+        <!--Login-->
+        <forward name="Administrador" path="/main_menu.jsp"/>
+        <forward name="doctor" path="/medical_index2.jsp"/>
+        <forward name="error" path="/Inicio.jsp"/>
+        <!--Usuarios-->
+        <forward name="result_userform" path="/usuarios_form_add.jsp"/>
+        <forward name="show_users" path="/usuarios_form_show.jsp" redirect="true"/>
+        <forward name="edit_user" path="/usuarios_form_edit.jsp"/>
+        <forward name="error" path="/usuarios_menu.jsp"/>
+        <forward name="menu_users" path="/usuarios_menu.jsp"/>
+        <!--Medicos-->
+        <forward name="add_result" path="/registrar_medico.jsp"/>
+        <forward name="edit_result" path="/editarInfo_medico.jsp"/>
+        <forward name="MostrarMed" path="/mostrar_medico.jsp"/>
+        <!--Pacientes-->
+        <forward name="Paciente"  path="/mantenimientoPaciente.jsp"/>
+        <forward name="add_result" path="/mostrarpaciente.jsp"/>
+        <forward name="mostrarpaciente" path="/mostrarpaciente.jsp"/>
+        <forward name="ingresarpaciente" path="/ingresarpaciente.jsp"/>
+        <forward name="modificar" path="/modificar.jsp"/>
+        <!--CONSULTORIO-->
+        <forward name="set" path="/consultoriofrm.jsp"/>
+        <forward name="get" path="/consultoriomod.jsp"/>
+        <forward name="also" path="/consultoriomod.jsp"/>
+        <forward name="fallar" path="/consultorioMenu.jsp"/>
+        <forward name="consultar" path="/consultoriolista.jsp"/>
+        <!--Especialidades-->
+         <!--Otros-->
+        <forward name="welcome"  path="/Welcome.do"/>
+        <forward name="error" path="/Inicio.jsp"/>
+        <forward name="add_result" path="/registrar_medico.jsp"/>
+        <forward name="edit_result" path="/editarInfo_medico.jsp"/>
+        
+    </global-forwards>
+
+    <action-mappings>
+         <!--Login-->
+        <action name="LoginActionForm" path="/inicioSesion" scope="request" type="controller.action.LoginAction"/>
+        <action name="LoginActionForm" path="/cerrarSesion" scope="request" type="controller.action.LoginAction"/>
+        <!--Usuarios-->
+        <action input="/usuarios_form_add.jsp" name="UsuariosActionForm" path="/addUsuarios" scope="session" type="controller.action.UsuariosAction"/>
+        <action input="/usuarios_form_show.jsp" name="UsuariosActionForm" path="/showUsuarios" scope="session" type="controller.action.UsuariosAction"/>
+        <action input="/usuarios_form_show.jsp" name="UsuariosActionForm" path="/usuariosEditDelete" scope="session" type="controller.action.UsuariosAction"/>
+        <!--Medicos-->
+        <action name="MedicosActionForm" path="/medicosMantenimiento" scope="request" type="controller.action.MedicosAction"/>
+        <!--Pacientes-->
+        <action name="PacientesActionForm" path="/PacientesAction" scope="request" type="controller.action.PacientesAction"/>
+        <!--Consultorios-->
+        <action name="ConsultorioActionForm" path="/ConsultorioAction" scope="request" type="controller.action.ConsultorioAction"/>
+        <action name="ConsultorioActionForm" path="ConsultorioAction?action" scope="request" type="controller.action.ConsultorioAction"/>
+        <!--<action name="CosultorioActionForm" path="/Consultoriofrm" scope="request" type="controller.action.ConsultorioAction"/>-->
+        <!--Especialidades-->
+        <!--Otros-->
+        <action input="/registrar_medico.jsp" name="MedicosActionForm" path="/medicos" scope="session" type="controller.action.MedicosAction"/>
+        <!--<action input="/Inicio.jsp" name="LoginActionForm" path="/loginAction" scope="session" type="controller.action.LoginAction"/>-->
+        <action path="/Welcome" forward="/welcomeStruts.jsp"/>
+    </action-mappings>
+    
+    <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+    <message-resources parameter="com/myapp/struts/ApplicationResource"/>    
+    
+    <!-- ========================= Tiles plugin ===============================-->
+    <!--
+    This plugin initialize Tiles definition factory. This later can takes some
+    parameters explained here after. The plugin first read parameters from
+    web.xml, thenoverload them with parameters defined here. All parameters
+    are optional.
+    The plugin should be declared in each struts-config file.
+    - definitions-config: (optional)
+    Specify configuration file names. There can be several comma
+    separated file names (default: ?? )
+    - moduleAware: (optional - struts1.1)
+    Specify if the Tiles definition factory is module aware. If true
+    (default), there will be one factory for each Struts module.
+    If false, there will be one common factory for all module. In this
+    later case, it is still needed to declare one plugin per module.
+    The factory will be initialized with parameters found in the first
+    initialized plugin (generally the one associated with the default
+    module).
+    true : One factory per module. (default)
+    false : one single shared factory for all modules
+    - definitions-parser-validate: (optional)
+    Specify if xml parser should validate the Tiles configuration file.
+    true : validate. DTD should be specified in file header (default)
+    false : no validation
+
+    Paths found in Tiles definitions are relative to the main context.
+    -->
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml" />      
+        <set-property property="moduleAware" value="true" />
+    </plug-in>
+    
+    <!-- ========================= Validator plugin ================================= -->
+    <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+        <set-property
+            property="pathnames"
+            value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+    </plug-in>
+  
+</struts-config>
