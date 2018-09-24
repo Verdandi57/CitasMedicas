@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-21-2018 04:31:35 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernate.persistencia.Pacientes" table="pacientes" catalog="medical_system" optimistic-lock="version">
+        <id name="idPaciente" type="java.lang.Integer">
+            <column name="id_paciente" />
+            <generator class="identity" />
+        </id>
+        <property name="dui" type="string">
+            <column name="dui" length="10" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="100" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" length="100" />
+        </property>
+        <property name="fechaNacimiento" type="string">
+            <column name="fecha_nacimiento" length="25" />
+        </property>
+        <property name="sexo" type="string">
+            <column name="sexo" length="20" />
+        </property>
+        <property name="tipoSangre" type="string">
+            <column name="tipo_sangre" length="10" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="15" />
+        </property>
+        <property name="contacto" type="string">
+            <column name="contacto" length="50" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="100" />
+        </property>
+        <set name="citases" table="citas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_paciente" />
+            </key>
+            <one-to-many class="hibernate.persistencia.Citas" />
+        </set>
+    </class>
+</hibernate-mapping>

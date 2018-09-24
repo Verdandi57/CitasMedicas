@@ -110,17 +110,7 @@ public class UsuariosAction extends org.apache.struts.action.Action {
                     if (!(formBean.getUsuario() == null || formBean.getUsuario().equals("")
                             || formBean.getClave() == null|| formBean.getClave().equals("")
                             || formBean.getNivelAcceso() == null || formBean.getNivelAcceso().equals(""))) {
-                        List<Usuarios> checkusers = mantenimiento.checkAllUsers();
-                        boolean equal = false;
-                        for (Usuarios norepeat : checkusers) {
-                            if (formBean.getUsuario().equals(norepeat.getUsuario())) {
-                                formBean.setMensaje("El nombre de usuario ya esta en uso.\n Use otro nombre de usuario");
-                                return mapping.findForward(result_userform);
-                            } else {
-                                equal = true;
-                            }
-                        }
-                        if (equal) {
+                        
                             usuarios.setIdUsuario(formBean.getIdUsuario());
                             usuarios.setUsuario(formBean.getUsuario());
                             usuarios.setClave(formBean.getClave());
@@ -136,7 +126,7 @@ public class UsuariosAction extends org.apache.struts.action.Action {
                                     return mapping.findForward(result_userform);
                                 }
                             }
-                        }
+                        
                     } else {
                         formBean.setMensaje("Complete todos los campos para guardar los cambios hechos al usuario");
                     }

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-21-2018 04:31:35 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernate.persistencia.Consultorios" table="consultorios" catalog="medical_system" optimistic-lock="version">
+        <id name="idConsultorio" type="java.lang.Integer">
+            <column name="id_consultorio" />
+            <generator class="identity" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="25" />
+        </property>
+        <property name="ubicacion" type="string">
+            <column name="ubicacion" length="100" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="15" />
+        </property>
+        <set name="citases" table="citas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_consultorio" />
+            </key>
+            <one-to-many class="hibernate.persistencia.Citas" />
+        </set>
+    </class>
+</hibernate-mapping>
