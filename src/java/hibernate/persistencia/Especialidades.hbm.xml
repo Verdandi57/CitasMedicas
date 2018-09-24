@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 08-21-2018 04:31:35 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="hibernate.persistencia.Especialidades" table="especialidades" catalog="medical_system" optimistic-lock="version">
+        <id name="idEspecialidad" type="java.lang.Integer">
+            <column name="id_especialidad" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="medicos" class="hibernate.persistencia.Medicos" fetch="select">
+            <column name="id_medico" />
+        </many-to-one>
+        <property name="especialidad" type="string">
+            <column name="especialidad" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>
